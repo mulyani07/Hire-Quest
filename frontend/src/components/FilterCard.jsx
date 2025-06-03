@@ -6,6 +6,10 @@ import { setSearchedQuery } from '@/redux/jobSlice'
 
 const fitlerData = [
     {
+        fitlerType: "General",
+        array: ["All Jobs"] // opsi untuk reset filter
+    },
+    {
         fitlerType: "Location",
         array: ["Jakarta", "Bandung", "Surabaya", "Solo", "Yogyakarta", "Malang"]
     },
