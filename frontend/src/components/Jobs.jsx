@@ -10,19 +10,23 @@ const Jobs = () => {
   const [filterJobs, setFilterJobs] = useState(allJobs);
 
   useEffect(() => {
-    if (searchedQuery) {
-      const filteredJobs = allJobs.filter((job) => {
-        return job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.location.toLowerCase().includes(searchedQuery.toLowerCase()) ||
-          job.jobType.toLowerCase().includes(searchedQuery.toLowerCase())    
+  console.log("Current searchedQuery:", searchedQuery);
+  console.log("All Jobs:", allJobs.length);
 
-      })
-      setFilterJobs(filteredJobs)
-    } else {
-      setFilterJobs(allJobs)
-    }
-  }, [allJobs, searchedQuery]);
+  if (searchedQuery && searchedQuery !== "All Jobs") {
+    const filteredJobs = allJobs.filter((job) => {
+      return job.title.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+        job.description.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+        job.location.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+        job.jobType.toLowerCase().includes(searchedQuery.toLowerCase()) ||
+        (job.general && job.general.toLowerCase().includes(searchedQuery.toLowerCase()))
+    });
+    setFilterJobs(filteredJobs);
+  } else {
+    setFilterJobs(allJobs); // inilah bagian yang akan jalan untuk "All Jobs"
+  }
+}, [allJobs, searchedQuery]);
+
 
   return (
     <div className="min-h-screen bg-gray-50">
